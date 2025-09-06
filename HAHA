@@ -1,0 +1,42 @@
+-- Put this LocalScript inside StarterGui
+local player = game.Players.LocalPlayer
+local playerGui = player:WaitForChild("PlayerGui")
+
+-- ScreenGui
+local screenGui = Instance.new("ScreenGui")
+screenGui.Parent = playerGui
+
+-- Frame (covers half of the screen, thick black)
+local frame = Instance.new("Frame")
+frame.Size = UDim2.new(0.5, 0, 1, 0) -- half screen width
+frame.Position = UDim2.new(0.25, 0, 0, 0) -- centered horizontally
+frame.BackgroundColor3 = Color3.fromRGB(0, 0, 0) -- pure black
+frame.BackgroundTransparency = 0 -- solid
+frame.Parent = screenGui
+
+-- Top label (ThundarZ)
+local topText = Instance.new("TextLabel")
+topText.Size = UDim2.new(1, 0, 0.15, 0)
+topText.Position = UDim2.new(0, 0, 0, 0)
+topText.BackgroundTransparency = 1
+topText.Text = "ThundarZ"
+topText.TextScaled = true
+topText.Font = Enum.Font.SourceSansBold
+topText.TextColor3 = Color3.fromRGB(255, 255, 0) -- yellow
+topText.Parent = frame
+
+-- Middle text
+local middleText = Instance.new("TextLabel")
+middleText.Size = UDim2.new(1, -20, 0.3, 0)
+middleText.Position = UDim2.new(0, 10, 0.35, 0)
+middleText.BackgroundTransparency = 1
+middleText.TextWrapped = true
+middleText.TextScaled = true
+middleText.Font = Enum.Font.SourceSansBold
+middleText.TextColor3 = Color3.fromRGB(255, 0, 0) -- red
+middleText.Text = "TURN OFF DELTA ANTI SCAM AND TURN OFF VERIFY TELEPORTS TO WORK THIS SCRIPT"
+middleText.Parent = frame
+
+-- Optional: fade out after few seconds
+task.wait(10000)
+screenGui:Destroy()
