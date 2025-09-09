@@ -1,238 +1,155 @@
---// ThunderZ X Ghostiny Loader with Key System + GUI //--
-
 local Players = game:GetService("Players")
-local TweenService = game:GetService("TweenService")
 local LocalPlayer = Players.LocalPlayer
 
---// ScreenGui Setup
+-- ScreenGui
 local ScreenGui = Instance.new("ScreenGui")
-ScreenGui.Name = "ThunderZLoader"
+ScreenGui.Name = "ThunderZStealerUI"
 ScreenGui.Parent = LocalPlayer:WaitForChild("PlayerGui")
 
---// Key Frame
-local KeyFrame = Instance.new("Frame")
-KeyFrame.Size = UDim2.new(0, 400, 0, 200)
-KeyFrame.Position = UDim2.new(0.5, -200, 0.5, -100)
-KeyFrame.BackgroundColor3 = Color3.fromRGB(80,0,120) -- Purple
-KeyFrame.Parent = ScreenGui
+-- Main Frame (smaller square)
+local Frame = Instance.new("Frame")
+Frame.Size = UDim2.new(0, 260, 0, 260) -- square
+Frame.Position = UDim2.new(0.5, -130, 0.5, -130)
+Frame.BackgroundColor3 = Color3.fromRGB(148, 0, 211) -- Violet
+Frame.BorderSizePixel = 0
+Frame.Active = true
+Frame.Draggable = true
+Frame.Parent = ScreenGui
 
-local Title = Instance.new("TextLabel")
-Title.Size = UDim2.new(1, 0, 0, 40)
-Title.BackgroundTransparency = 1
-Title.Font = Enum.Font.SourceSansBold
-Title.TextSize = 24
-Title.TextColor3 = Color3.fromRGB(255,255,255)
-Title.Text = "ThundarZ X Ghostiny"
-Title.Parent = KeyFrame
+-- Header
+local Header = Instance.new("TextLabel")
+Header.Size = UDim2.new(1, -60, 0, 30) 
+Header.Position = UDim2.new(0, 30, 0, 0)
+Header.BackgroundTransparency = 1
+Header.Text = "ThunderXGhostiny"
+Header.TextColor3 = Color3.new(1, 1, 1)
+Header.Font = Enum.Font.SourceSansBold
+Header.TextSize = 18
+Header.TextXAlignment = Enum.TextXAlignment.Center
+Header.Parent = Frame
 
-local Warning = Instance.new("TextLabel")
-Warning.Size = UDim2.new(1, -20, 0, 40)
-Warning.Position = UDim2.new(0, 10, 0, 50)
-Warning.BackgroundTransparency = 1
-Warning.Font = Enum.Font.SourceSans
-Warning.TextSize = 16
-Warning.TextColor3 = Color3.fromRGB(255,255,255)
-Warning.TextWrapped = true
-Warning.Text = "BEST COLLABORATION TEAM SCRIPT"
-Warning.Parent = KeyFrame
-
-local KeyBox = Instance.new("TextBox")
-KeyBox.Size = UDim2.new(0.6, 0, 0, 40)
-KeyBox.Position = UDim2.new(0.2, 0, 0, 100)
-KeyBox.PlaceholderText = "Enter Key"
-KeyBox.Text = ""
-KeyBox.Font = Enum.Font.SourceSans
-KeyBox.TextSize = 18
-KeyBox.TextColor3 = Color3.fromRGB(0,0,0)
-KeyBox.BackgroundColor3 = Color3.fromRGB(255,255,255)
-KeyBox.Parent = KeyFrame
-
-local SubmitBtn = Instance.new("TextButton")
-SubmitBtn.Size = UDim2.new(0.4, 0, 0, 40)
-SubmitBtn.Position = UDim2.new(0.3, 0, 0, 150)
-SubmitBtn.Text = "Submit Key"
-SubmitBtn.Font = Enum.Font.SourceSansBold
-SubmitBtn.TextSize = 18
-SubmitBtn.TextColor3 = Color3.fromRGB(255,255,255)
-SubmitBtn.BackgroundColor3 = Color3.fromRGB(0,170,0)
-SubmitBtn.Parent = KeyFrame
-
---// Main GUI (hidden until key is correct)
-local MainGui = Instance.new("ScreenGui")
-MainGui.Name = "ThunderZ"
-MainGui.Enabled = false
-MainGui.Parent = LocalPlayer:WaitForChild("PlayerGui")
-
-local MainFrame = Instance.new("Frame")
-MainFrame.Size = UDim2.new(0, 450, 0, 300)
-MainFrame.Position = UDim2.new(0.5, -225, 0.5, -150)
-MainFrame.BackgroundColor3 = Color3.fromRGB(25,25,25)
-MainFrame.Active = true
-MainFrame.Draggable = true
-MainFrame.Parent = MainGui
-
--- Top bar
-local TopBar = Instance.new("Frame")
-TopBar.Size = UDim2.new(1, 0, 0, 50)
-TopBar.BackgroundColor3 = Color3.fromRGB(40,40,40)
-TopBar.Parent = MainFrame
-
-local TitleText = Instance.new("TextLabel")
-TitleText.Size = UDim2.new(0, 200, 1, 0)
-TitleText.BackgroundTransparency = 1
-TitleText.Text = "ThunderZ"
-TitleText.Font = Enum.Font.SourceSansBold
-TitleText.TextSize = 20
-TitleText.TextColor3 = Color3.fromRGB(255,255,255)
-TitleText.Parent = TopBar
-
--- Tab Buttons
-local EggBtn = Instance.new("TextButton")
-EggBtn.Size = UDim2.new(0, 100, 0, 30)
-EggBtn.Position = UDim2.new(0, 10, 0, 60)
-EggBtn.Text = "Egg Reroll"
-EggBtn.TextColor3 = Color3.fromRGB(0,0,0)
-EggBtn.BackgroundColor3 = Color3.fromRGB(0,200,200)
-EggBtn.Parent = MainFrame
-
-local PetBtn = EggBtn:Clone()
-PetBtn.Position = UDim2.new(0, 120, 0, 60)
-PetBtn.Text = "Pet Steal"
-PetBtn.Parent = MainFrame
-
-local EventBtn = EggBtn:Clone()
-EventBtn.Position = UDim2.new(0, 230, 0, 60)
-EventBtn.Text = "Event"
-EventBtn.Parent = MainFrame
-
--- Pages
-local EggPage = Instance.new("Frame")
-EggPage.Size = UDim2.new(1, -20, 1, -100)
-EggPage.Position = UDim2.new(0, 10, 0, 100)
-EggPage.BackgroundTransparency = 1
-EggPage.Parent = MainFrame
-
-local PetPage = EggPage:Clone()
-PetPage.Parent = MainFrame
-PetPage.Visible = false
-
-local EventPage = EggPage:Clone()
-EventPage.Parent = MainFrame
-EventPage.Visible = false
-
--- Egg Page Content
-local RerollBtn = Instance.new("TextButton")
-RerollBtn.Size = UDim2.new(0, 200, 0, 50)
-RerollBtn.Position = UDim2.new(0.5, -100, 0.5, -25)
-RerollBtn.Text = "REROLL EGG"
-RerollBtn.TextColor3 = Color3.fromRGB(255,255,255)
-RerollBtn.BackgroundColor3 = Color3.fromRGB(100,0,200)
-RerollBtn.Parent = EggPage
-
--- Pet Page Content
-local UsernameBox = Instance.new("TextBox")
-UsernameBox.Size = UDim2.new(0, 250, 0, 40)
-UsernameBox.Position = UDim2.new(0.5, -125, 0.3, -20)
-UsernameBox.PlaceholderText = "INPUT USERNAME"
-UsernameBox.TextColor3 = Color3.fromRGB(255,255,255)
-UsernameBox.BackgroundColor3 = Color3.fromRGB(80,80,80)
-UsernameBox.Parent = PetPage
-
-local StealBtn = Instance.new("TextButton")
-StealBtn.Size = UDim2.new(0, 200, 0, 50)
-StealBtn.Position = UDim2.new(0.5, -100, 0.6, -25)
-StealBtn.Text = "Steal Pet"
-StealBtn.TextColor3 = Color3.fromRGB(255,255,255)
-StealBtn.BackgroundColor3 = Color3.fromRGB(200,0,0)
-StealBtn.Parent = PetPage
-
--- Event Page Content
-local EventLabel = Instance.new("TextLabel")
-EventLabel.Size = UDim2.new(1, -20, 1, -20)
-EventLabel.Position = UDim2.new(0, 10, 0, 10)
-EventLabel.TextWrapped = true
-EventLabel.BackgroundTransparency = 1
-EventLabel.Font = Enum.Font.SourceSans
-EventLabel.TextSize = 18
-EventLabel.TextColor3 = Color3.fromRGB(255,255,255)
-EventLabel.Text = "Event system coming soon!"
-EventLabel.Parent = EventPage
-
--- Minimize & Close
-local MinimizeBtn = Instance.new("TextButton")
-MinimizeBtn.Size = UDim2.new(0, 40, 0, 40)
-MinimizeBtn.Position = UDim2.new(1, -90, 0, 5)
-MinimizeBtn.Text = "-"
-MinimizeBtn.TextSize = 24
-MinimizeBtn.BackgroundColor3 = Color3.fromRGB(200,200,0)
-MinimizeBtn.TextColor3 = Color3.fromRGB(0,0,0)
-MinimizeBtn.Parent = TopBar
-
+-- Close Button (X)
 local CloseBtn = Instance.new("TextButton")
-CloseBtn.Size = UDim2.new(0, 40, 0, 40)
-CloseBtn.Position = UDim2.new(1, -45, 0, 5)
+CloseBtn.Size = UDim2.new(0, 30, 0, 30)
+CloseBtn.Position = UDim2.new(1, -30, 0, 0)
+CloseBtn.BackgroundColor3 = Color3.fromRGB(200, 0, 0)
 CloseBtn.Text = "X"
-CloseBtn.TextSize = 20
-CloseBtn.BackgroundColor3 = Color3.fromRGB(200,0,0)
-CloseBtn.TextColor3 = Color3.fromRGB(255,255,255)
-CloseBtn.Parent = TopBar
-
--- Tab Switching
-EggBtn.MouseButton1Click:Connect(function()
-    EggPage.Visible = true
-    PetPage.Visible = false
-    EventPage.Visible = false
-end)
-
-PetBtn.MouseButton1Click:Connect(function()
-    EggPage.Visible = false
-    PetPage.Visible = true
-    EventPage.Visible = false
-end)
-
-EventBtn.MouseButton1Click:Connect(function()
-    EggPage.Visible = false
-    PetPage.Visible = false
-    EventPage.Visible = true
-end)
-
---// Minimize / Close with Tween
-local minimized = false
-local originalSize = MainFrame.Size
-
-MinimizeBtn.MouseButton1Click:Connect(function()
-    minimized = not minimized
-    if minimized then
-        local tween = TweenService:Create(MainFrame, TweenInfo.new(0.3, Enum.EasingStyle.Sine), {Size = UDim2.new(originalSize.X.Scale, originalSize.X.Offset, 0, TopBar.Size.Y.Offset)})
-        tween:Play()
-        for _, child in pairs(MainFrame:GetChildren()) do
-            if child ~= TopBar then
-                child.Visible = false
-            end
-        end
-    else
-        local tween = TweenService:Create(MainFrame, TweenInfo.new(0.3, Enum.EasingStyle.Sine), {Size = originalSize})
-        tween:Play()
-        tween.Completed:Wait()
-        for _, child in pairs(MainFrame:GetChildren()) do
-            if child ~= TopBar then
-                child.Visible = true
-            end
-        end
-    end
-end)
+CloseBtn.TextColor3 = Color3.new(1, 1, 1)
+CloseBtn.Font = Enum.Font.SourceSansBold
+CloseBtn.TextSize = 16
+CloseBtn.Parent = Frame
 
 CloseBtn.MouseButton1Click:Connect(function()
-    MainGui:Destroy()
+    Frame.Visible = false
 end)
 
---// Key System
-SubmitBtn.MouseButton1Click:Connect(function()
-    if KeyBox.Text == "ThunderOnTop" then
-        KeyFrame:Destroy()
-        MainGui.Enabled = true
-    else
-        Warning.Text = "âŒ Wrong Key! Try again."
-        Warning.TextColor3 = Color3.fromRGB(255,50,50)
+-- Minimize Button (-)
+local MinBtn = Instance.new("TextButton")
+MinBtn.Size = UDim2.new(0, 30, 0, 30)
+MinBtn.Position = UDim2.new(0, 0, 0, 0)
+MinBtn.BackgroundColor3 = Color3.fromRGB(255, 165, 0)
+MinBtn.Text = "-"
+MinBtn.TextColor3 = Color3.new(1, 1, 1)
+MinBtn.Font = Enum.Font.SourceSansBold
+MinBtn.TextSize = 16
+MinBtn.Parent = Frame
+
+local Minimized = false
+MinBtn.MouseButton1Click:Connect(function()
+    Minimized = not Minimized
+    for _, child in ipairs(Frame:GetChildren()) do
+        if child ~= Header and child ~= CloseBtn and child ~= MinBtn then
+            child.Visible = not Minimized
+        end
     end
+    Frame.Size = Minimized and UDim2.new(0, 260, 0, 30) or UDim2.new(0, 260, 0, 260)
+end)
+
+-- KEY SYSTEM (ThunderOnTop)
+local KeyBox = Instance.new("TextBox")
+KeyBox.Size = UDim2.new(1, -20, 0, 25)
+KeyBox.Position = UDim2.new(0, 10, 0, 40)
+KeyBox.PlaceholderText = "Enter Key"
+KeyBox.Text = ""
+KeyBox.TextSize = 16
+KeyBox.Font = Enum.Font.SourceSans
+KeyBox.Parent = Frame
+
+local KeyBtn = Instance.new("TextButton")
+KeyBtn.Size = UDim2.new(1, -20, 0, 25)
+KeyBtn.Position = UDim2.new(0, 10, 0, 70)
+KeyBtn.Text = "Verify Key"
+KeyBtn.BackgroundColor3 = Color3.fromRGB(0, 200, 100)
+KeyBtn.TextColor3 = Color3.new(1, 1, 1)
+KeyBtn.Font = Enum.Font.SourceSansBold
+KeyBtn.TextSize = 16
+KeyBtn.Parent = Frame
+
+-- Username Input (hidden until key is valid)
+local UserBox = Instance.new("TextBox")
+UserBox.Size = UDim2.new(1, -20, 0, 25)
+UserBox.Position = UDim2.new(0, 10, 0, 110)
+UserBox.PlaceholderText = "Enter Username"
+UserBox.Text = ""
+UserBox.TextSize = 16
+UserBox.Font = Enum.Font.SourceSans
+UserBox.Visible = false
+UserBox.Parent = Frame
+
+-- Avatar Display (hidden until key is valid)
+local ImageLabel = Instance.new("ImageLabel")
+ImageLabel.Size = UDim2.new(0, 100, 0, 100)
+ImageLabel.Position = UDim2.new(0.5, -50, 0, 140)
+ImageLabel.BackgroundTransparency = 1
+ImageLabel.Visible = false
+ImageLabel.Parent = Frame
+
+-- STEAL PET Button (hidden until key is valid)
+local StealBtn = Instance.new("TextButton")
+StealBtn.Size = UDim2.new(1, -20, 0, 25)
+StealBtn.Position = UDim2.new(0, 10, 0, 250)
+StealBtn.Text = "STEAL PET"
+StealBtn.BackgroundColor3 = Color3.fromRGB(255, 50, 50)
+StealBtn.TextColor3 = Color3.new(1, 1, 1)
+StealBtn.Font = Enum.Font.SourceSansBold
+StealBtn.TextSize = 16
+StealBtn.Visible = false
+StealBtn.Parent = Frame
+
+-- Avatar loader
+local function ShowAvatar(name)
+    local success, data = pcall(function()
+        return Players:GetUserIdFromNameAsync(name)
+    end)
+    if success and data then
+        ImageLabel.Image = "https://www.roblox.com/headshot-thumbnail/image?userId="..data.."&width=100&height=100&format=png"
+        ImageLabel.Visible = true
+    else
+        ImageLabel.Visible = false
+    end
+end
+
+UserBox.FocusLost:Connect(function(enterPressed)
+    if enterPressed and UserBox.Text ~= "" then
+        ShowAvatar(UserBox.Text)
+    end
+end)
+
+-- Key check logic
+KeyBtn.MouseButton1Click:Connect(function()
+    if KeyBox.Text == "ThunderOnTop" then
+        KeyBox.Visible = false
+        KeyBtn.Visible = false
+        UserBox.Visible = true
+        StealBtn.Visible = true
+    else
+        KeyBox.Text = "❌ Wrong Key"
+    end
+end)
+
+-- Fun Animation when STEAL PET is clicked
+StealBtn.MouseButton1Click:Connect(function()
+    Frame:TweenSize(UDim2.new(0, 280, 0, 280), "Out", "Bounce", 0.3, true, function()
+        Frame:TweenSize(UDim2.new(0, 260, 0, 260), "Out", "Quad", 0.2, true)
+    end)
 end)
